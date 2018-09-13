@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="my-4">Participants</h1>
+    <p>Put on your partici-pants and join us</p>
+
+    {% for company, participants in companies %}
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="my-4">{{ company }}</h2>
+            </div>
+
+            {% for participant in participants %}
+                <div class="col-lg-4 col-sm-6 text-center mb-4">
+                    <img class="rounded-circle img-fluid d-block mx-auto" src="https://robohash.org/{{ participant.name }}?size=200x200" alt="">
+                    <h3>{{ participant.name }}</h3>
+                    <p>{{ participant.email }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            <p>No one here yet</p>
+        </div>
+    {% endfor %}
+{% endblock %}
