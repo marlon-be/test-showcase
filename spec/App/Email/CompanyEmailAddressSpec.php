@@ -7,8 +7,8 @@ use PhpSpec\ObjectBehavior;
 
 /**
  * This is a spec test, they are preferably written before the actual code, but can still have merit if written later
- * These tests are best used for small blocks of functionality in isolated classes
- * Objects can be mocked here, but it is discouraged
+ * These tests are intended for objects whose behaviour we want to test
+ * PHPSpec is specifically made for these tests, as is visible in its limitations. For instance, it's very hard to test static methods, or partially mock objects
  *
  * @mixin CompanyEmailAddress
  */
