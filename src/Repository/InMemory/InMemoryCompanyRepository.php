@@ -3,11 +3,11 @@
 namespace App\Repository\InMemory;
 
 use App\Entity\Company;
-use App\Repository\Interfaces;
+use App\Repository\Interfaces\CompanyRepository;
 use App\Testing\InMemoryEntityRepositoryDoctrineMethodsTrait;
 use App\Testing\InMemoryEntityRepositoryTrait;
 
-class InMemoryCompanyRepository implements Interfaces\CompanyRepository
+class InMemoryCompanyRepository implements CompanyRepository
 {
     use InMemoryEntityRepositoryTrait;
     use InMemoryEntityRepositoryDoctrineMethodsTrait;
@@ -18,19 +18,19 @@ class InMemoryCompanyRepository implements Interfaces\CompanyRepository
             foreach ($criteria as $field => $value) {
                 switch ($field) {
                     case 'name':
-                        return (string) $company->getName() === (string) $value;
-                        break;
+                        return strtolower($company->getName()) === strtolower($value);
+
                     default:
-                        return false;
+                        throw new \RuntimeException('Unknown field: ' . $field);
                 }
             }
         });
     }
 
-    public function findOneBy(array $criteria, array $orderBy = null)
+    public function findOneBy(array $criteria)
     {
         $results = $this->findBy($criteria);
-        return reset($results);
+        return reset($results) ?: null;
     }
 
     public function findAll()
@@ -38,7 +38,7 @@ class InMemoryCompanyRepository implements Interfaces\CompanyRepository
         return $this->entities->toArray();
     }
 
-    public function find($id, $lockMode = null, $lockVersion = null)
+    public function find($id)
     {
         return $this->findOneBy(['id' => $id]);
     }

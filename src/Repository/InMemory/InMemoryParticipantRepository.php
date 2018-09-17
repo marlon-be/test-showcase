@@ -3,34 +3,34 @@
 namespace App\Repository\InMemory;
 
 use App\Entity\Participant;
-use App\Repository\Interfaces;
+use App\Repository\Interfaces\ParticipantRepository;
 use App\Testing\InMemoryEntityRepositoryDoctrineMethodsTrait;
 use App\Testing\InMemoryEntityRepositoryTrait;
 
-class InMemoryParticipantRepository implements Interfaces\ParticipantRepository
+class InMemoryParticipantRepository implements ParticipantRepository
 {
     use InMemoryEntityRepositoryTrait;
     use InMemoryEntityRepositoryDoctrineMethodsTrait;
 
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria)
     {
         return $this->entities->filter(function (Participant $participant) use ($criteria) {
             foreach ($criteria as $field => $value) {
                 switch ($field) {
                     case 'name':
-                        return (string) $participant->getName() === (string) $value;
-                        break;
+                        return strtolower($participant->getName()) === strtolower($value);
+
                     case 'email':
-                        return (string) $participant->getEmail() === (string) $value;
-                        break;
+                        return strtolower($participant->getEmail()) === strtolower($value);
+
                     default:
-                        return false;
+                        throw new \RuntimeException('Unknown field: ' . $field);
                 }
             }
         });
     }
 
-    public function findOneBy(array $criteria, array $orderBy = null)
+    public function findOneBy(array $criteria)
     {
         $results = $this->findBy($criteria);
         return reset($results);
@@ -41,15 +41,16 @@ class InMemoryParticipantRepository implements Interfaces\ParticipantRepository
         return $this->entities->toArray();
     }
 
-    public function find($id, $lockMode = null, $lockVersion = null)
+    public function find($id)
     {
         return $this->findOneBy(['id' => $id]);
     }
 
     public function isNameTaken(string $name): bool
     {
+        /** @var Participant $entity */
         foreach ($this->entities->toArray() as $entity) {
-            if ($entity->getName() === $name) {
+            if (strtolower($entity->getName()) === strtolower($name)) {
                 return true;
             }
         }

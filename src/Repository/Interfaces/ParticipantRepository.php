@@ -6,9 +6,9 @@ use App\Entity\Participant;
 
 interface ParticipantRepository
 {
-    public function find($id, $lockMode = null, $lockVersion = null);
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null);
-    public function findOneBy(array $criteria, array $orderBy = null);
+    public function find($id);
+    public function findBy(array $criteria);
+    public function findOneBy(array $criteria);
     public function findAll();
 
     public function add(Participant $participant) : void;
