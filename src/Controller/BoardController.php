@@ -42,8 +42,7 @@ final class BoardController extends AbstractController
             ]);
         }
 
-        $command = new CreateParticipantCommand();
-        $command->setEmail($form->getData()['email']);
+        $command = new CreateParticipantCommand($form->getData()['email']);
         $commandBus->handle($command);
 
         return $this->redirectToRoute('participant_overview');

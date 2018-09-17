@@ -2,12 +2,11 @@
 
 namespace App\CommandBus\Handler;
 
-use App\Email\CompanyEmailAddress;
+use App\CommandBus\Command\CreateParticipantCommand;
 use App\Email\MailNameFormatter;
 use App\Email\ParticipantNameGenerator;
 use App\Entity\Company;
 use App\Entity\Participant;
-use App\CommandBus\Command\CreateParticipantCommand;
 use App\Repository\Interfaces\CompanyRepository;
 use App\Repository\Interfaces\ParticipantRepository;
 
@@ -29,7 +28,7 @@ class CreateParticipantCommandHandler
 
     public function handle(CreateParticipantCommand $command) : void
     {
-        $companyEmailAddress = new CompanyEmailAddress($command->getEmail());
+        $companyEmailAddress = $command->getEmail();
 
         $companyName = MailNameFormatter::formatName($companyEmailAddress->getDomain());
         $company = $this->companyRepository->findOneBy(['name' => $companyName]);

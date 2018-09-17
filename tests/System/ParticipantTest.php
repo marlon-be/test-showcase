@@ -72,10 +72,7 @@ class ParticipantTest extends AbstractSystemTest
 
     public function createCommand(string $email = null) : CreateParticipantCommand
     {
-        $command = new CreateParticipantCommand();
-        $command->setEmail($email ?? 'admin@marlon.be');
-
-        return $command;
+        return new CreateParticipantCommand($email ?? 'admin@marlon.be');
     }
 
     public function addDefaultParticipant() : void
