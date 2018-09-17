@@ -25,5 +25,5 @@ steps:
 - script: bin/phpspec run
   displayName: Run PHPSpec
 
-- script: bin/phpunit
+- script: APP_ENV=test bin/phpunit
   displayName: Run PHPUnit
