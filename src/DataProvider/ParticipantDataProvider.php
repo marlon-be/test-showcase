@@ -8,21 +8,21 @@ use App\Entity\Participant;
 
 class ParticipantDataProvider
 {
-    public static function createParticipant() : Participant
+    public function createParticipant() : Participant
     {
         return new Participant(
-            self::createCompany(),
-            self::createCompanyEmailAddress(),
+            $this->createCompany(),
+            $this->createCompanyEmailAddress(),
             'Admin'
         );
     }
 
-    public static function createCompany() : Company
+    public function createCompany() : Company
     {
         return new Company('Marlon');
     }
 
-    public static function createCompanyEmailAddress() : CompanyEmailAddress
+    public function createCompanyEmailAddress() : CompanyEmailAddress
     {
         return new CompanyEmailAddress('admin@marlon.be');
     }

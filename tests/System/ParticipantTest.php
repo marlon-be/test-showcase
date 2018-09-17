@@ -77,7 +77,8 @@ class ParticipantTest extends AbstractSystemTest
 
     public function addDefaultParticipant() : void
     {
-        $participant = ParticipantDataProvider::createParticipant();
+        $dataProvider = new ParticipantDataProvider();
+        $participant = $dataProvider->createParticipant();
         $this->companyRepository->add($participant->getCompany());
         $this->participantRepository->add($participant);
         $this->em->flush();
