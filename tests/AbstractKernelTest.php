@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Dotenv\Dotenv;
 
-abstract class AbstractSystemTest extends KernelTestCase
+abstract class AbstractKernelTest extends KernelTestCase
 {
     private static $firstRun = true;
     /** @var Connection */

@@ -6,10 +6,10 @@ use App\CommandBus\Command\CreateParticipantCommand;
 use App\DataProvider\ParticipantDataProvider;
 use App\Repository\Interfaces\CompanyRepository;
 use App\Repository\Interfaces\ParticipantRepository;
-use App\Tests\AbstractSystemTest;
+use App\Tests\AbstractKernelTest;
 
 /**
- * This is a system test, it uses an actual database to query
+ * This is a kernel test, it uses an actual database to query
  * The upside of these kind of tests are that they are very close to the real deal, if something is wrong, this test will probably catch it
  * There are 3 big downsides of these kind of tests
  *  - though a lot of bugs will be caught by this test, it will not help a lot with finding what actually went wrong
@@ -19,7 +19,7 @@ use App\Tests\AbstractSystemTest;
  * @covers \App\CommandBus\Handler\CreateParticipantCommandHandler
  * @covers \App\Email\ParticipantNameGenerator
  */
-class ParticipantTest extends AbstractSystemTest
+class ParticipantTest extends AbstractKernelTest
 {
     /** @var ParticipantRepository */
     private $participantRepository;
