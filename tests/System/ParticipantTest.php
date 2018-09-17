@@ -90,7 +90,6 @@ class ParticipantTest extends AbstractKernelTest
 
         $this->participantRepository = $this->getContainer()->get(ParticipantRepository::class);
         $this->companyRepository = $this->getContainer()->get(CompanyRepository::class);
-
     }
 }
 

@@ -41,11 +41,6 @@ class InMemoryParticipantRepository implements ParticipantRepository
         return $this->entities->toArray();
     }
 
-    public function find($id)
-    {
-        return $this->findOneBy(['id' => $id]);
-    }
-
     public function isNameTaken(string $name): bool
     {
         /** @var Participant $entity */

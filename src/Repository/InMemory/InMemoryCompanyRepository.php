@@ -12,7 +12,7 @@ class InMemoryCompanyRepository implements CompanyRepository
     use InMemoryEntityRepositoryTrait;
     use InMemoryEntityRepositoryDoctrineMethodsTrait;
 
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria)
     {
         return $this->entities->filter(function (Company $company) use ($criteria) {
             foreach ($criteria as $field => $value) {
@@ -31,16 +31,6 @@ class InMemoryCompanyRepository implements CompanyRepository
     {
         $results = $this->findBy($criteria);
         return reset($results) ?: null;
-    }
-
-    public function findAll()
-    {
-        return $this->entities->toArray();
-    }
-
-    public function find($id)
-    {
-        return $this->findOneBy(['id' => $id]);
     }
 
     public function add(Company $company): void

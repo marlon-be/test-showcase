@@ -6,8 +6,6 @@ use App\Entity\Participant;
 
 interface ParticipantRepository
 {
-    public function find($id);
-    public function findBy(array $criteria);
     public function findOneBy(array $criteria);
     public function findAll();
 
